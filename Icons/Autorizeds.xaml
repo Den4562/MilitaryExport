@@ -42,11 +42,9 @@
                 <PasswordBox x:Name="Pass" BorderBrush="White" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" />
             </StackPanel>
 
-            <Button x:Name="Enter" Content="Log in" Canvas.Bottom="100" Canvas.Left="396" Width="200" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
+            <Button x:Name="Enter" Content="Log in" Canvas.Bottom="100" Canvas.Left="260" Width="250" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
                  Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Canvas.Top="270" VerticalAlignment="Center"/>
-            <Button x:Name="Reg" Content="Registration" Canvas.Bottom="100" Canvas.Left="175" Width="200" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
-     Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Center" Canvas.Top="270" VerticalAlignment="Top" />
-            
+
 
             <materialDesign:Snackbar x:Name="Snackbar" Canvas.Left="241" Canvas.Top="22">
                 <materialDesign:SnackbarMessage Content="Успешный вход!" Foreground="White"/>
