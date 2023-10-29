@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WpfAppMilitaryExport.Army_Request"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="Gray"
+             TextElement.FontWeight="Regular"
+             xmlns:local="clr-namespace:WpfAppMilitaryExport"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="PageBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#273046" Offset="0"/>
+            <GradientStop Color="#131b28" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Новый стиль для элементов меню -->
+        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Foreground" Value="CadetBlue" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <StaticResource ResourceKey="PageBackground"/>
+        </Grid.Background>
+        <Grid Margin="0,90,0,0">
+            <Image x:Name="image1" Source="../Assets/Image/ВМС.png" Width="200" Height="250" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+            <Image x:Name="image2" Source="../Assets/Image/ВВС.png" Width="200" Height="250" HorizontalAlignment="Center" Margin="20,0,0,0"/>
+            <Image x:Name="image3" Source="../Assets/Image/Сухопутные силы.png" Width="200" Height="250" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+        </Grid>
+        <materialDesign:ColorZone Width="800" Height="60" Padding="16" Mode="Inverted">
+            <Grid>
+                <Menu HorizontalAlignment="Center" materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="0,0,-40,0">
+                    <!-- Применение стиля к элементам меню -->
+                    <MenuItem Header="ВМС" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem Header="Детали" Margin="10,0,0,0"/>
+                        <MenuItem Header="Вооружение" Margin="10,0,0,0"/>
+                    </MenuItem>
+                    <MenuItem Margin="10,0,0,0" Header="ВВС" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem   Header="Самолёты" Margin="10,0,0,0" />
+                        <MenuItem Header="Детали" Margin="10,0,0,0" />
+                        <MenuItem Header="Боеприпасы"  Margin="10,0,0,0"/>
+                    </MenuItem>
+                    <MenuItem Margin="10,0,0,0" Header="Сухопутные Силы" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem Header="Пехотное снаряжение" Margin="10,0,0,0"/>
+                        <MenuItem Header="Техника" Margin="10,0,0,0"/>
+                       
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </materialDesign:ColorZone>
+        
+    </Grid>
+</UserControl>

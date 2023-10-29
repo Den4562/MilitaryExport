@@ -11,6 +11,9 @@
     <None Remove="Assets\Image\Command.png" />
     <None Remove="Assets\Image\flag.gif" />
     <None Remove="Assets\Image\Ministry.png" />
+    <None Remove="Assets\Image\ВВС.png" />
+    <None Remove="Assets\Image\ВМС.png" />
+    <None Remove="Assets\Image\Сухопутные силы.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +28,9 @@
     <Resource Include="Assets\Image\Command.png" />
     <Resource Include="Assets\Image\flag.gif" />
     <Resource Include="Assets\Image\Ministry.png" />
+    <Resource Include="Assets\Image\ВВС.png" />
+    <Resource Include="Assets\Image\ВМС.png" />
+    <Resource Include="Assets\Image\Сухопутные силы.png" />
   </ItemGroup>
 
 </Project>

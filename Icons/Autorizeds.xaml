@@ -43,7 +43,7 @@
             </StackPanel>
 
             <Button x:Name="Enter" Content="Log in" Canvas.Bottom="100" Canvas.Left="260" Width="250" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
-                 Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Canvas.Top="270" VerticalAlignment="Center"/>
+                 Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Canvas.Top="270" VerticalAlignment="Center" Click="Enter_Click"/>
 
 
             <materialDesign:Snackbar x:Name="Snackbar" Canvas.Left="241" Canvas.Top="22">
