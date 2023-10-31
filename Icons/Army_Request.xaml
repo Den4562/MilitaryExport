@@ -30,27 +30,30 @@
             <Image x:Name="image2" Source="../Assets/Image/ВВС.png" Width="200" Height="250" HorizontalAlignment="Center" Margin="20,0,0,0"/>
             <Image x:Name="image3" Source="../Assets/Image/Сухопутные силы.png" Width="200" Height="250" HorizontalAlignment="Right" Margin="0,0,20,0"/>
         </Grid>
+
         <materialDesign:ColorZone Width="800" Height="60" Padding="16" Mode="Inverted">
-            <Grid>
-                <Menu HorizontalAlignment="Center" materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="0,0,-40,0">
+
+            <Grid Margin="0,0,0,-32">
+                <Image x:Name="image4" Source="../Assets/Image/Command.png" Height="54" Width="86" HorizontalAlignment="Center" Margin="0,-12,0,18"/>
+                <Menu HorizontalAlignment="left" materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="0,0,-40,0">
                     <!-- Применение стиля к элементам меню -->
                     <MenuItem Header="ВМС" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem Header="Детали" Margin="10,0,0,0"/>
-                        <MenuItem Header="Вооружение" Margin="10,0,0,0"/>
+                        <MenuItem Header="Деталі" Margin="10,0,0,0"/>
+                        <MenuItem Header="Озброєння" Margin="10,0,0,0"/>
                     </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="ВВС" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem   Header="Самолёты" Margin="10,0,0,0" />
+                    <MenuItem Margin="10,0,0,0" Header="ПЗС" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem Header="Літаки" Margin="10,0,0,0" Click="MenuAir_Click"  />
                         <MenuItem Header="Детали" Margin="10,0,0,0" />
-                        <MenuItem Header="Боеприпасы"  Margin="10,0,0,0"/>
+                        <MenuItem Header="Боєприпаси"  Margin="10,0,0,0"/>
                     </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="Сухопутные Силы" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem Header="Пехотное снаряжение" Margin="10,0,0,0"/>
+                    <MenuItem Margin="10,0,0,0" Header="Сухопутні Сили" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem Header="Піхотне спорядження" Margin="10,0,0,0"/>
                         <MenuItem Header="Техника" Margin="10,0,0,0"/>
-                       
+
                     </MenuItem>
                 </Menu>
             </Grid>
         </materialDesign:ColorZone>
-        
+
     </Grid>
 </UserControl>

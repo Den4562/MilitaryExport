@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAppMilitaryExport.Icons;
 using WpfAppMilitaryExport.Navigator;
 
 namespace WpfAppMilitaryExport
@@ -24,6 +25,12 @@ namespace WpfAppMilitaryExport
         public Army_Request()
         {
             InitializeComponent();
+        }
+
+        private void MenuAir_Click(object sender, RoutedEventArgs e)
+        {
+            var win_air = new WinAir();
+            NavigatorObject.Switch(win_air);
         }
     }
 }
