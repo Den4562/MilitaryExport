@@ -25,12 +25,18 @@ namespace WpfAppMilitaryExport.Icons
                 var authorizedPage = new Autorizeds(); // Предполагается, что Autorized - это UserControl для новой страницы
                 NavigatorObject.Switch(authorizedPage);
             };
+            image1.MouseLeftButtonDown += (sender, e) =>
+            {
+                // Переключитесь на страницу Autorized
+                var authorizedPage = new Autorizeds(); // Предполагается, что Autorized - это UserControl для новой страницы
+                NavigatorObject.Switch(authorizedPage);
+            };
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Создаем анимацию для линии
-            Storyboard lineAnimation = (Storyboard)FindResource("LineAnimation");
+            Storyboard lineAnimation = (Storyboard)FindResource("ImageAnimation");
             lineAnimation.Completed += lineAnim;
             lineAnimation.Begin();
         }

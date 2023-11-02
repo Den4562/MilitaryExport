@@ -8,8 +8,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\Image\Weapon\**" />
+    <EmbeddedResource Remove="Assets\Image\Weapon\**" />
+    <None Remove="Assets\Image\Weapon\**" />
+    <Page Remove="Assets\Image\Weapon\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Image\Air\Ammo\P-60.png" />
+    <None Remove="Assets\Image\Air\Ammo\P-73.png" />
+    <None Remove="Assets\Image\Air\Ammo\R-27.png" />
+    <None Remove="Assets\Image\Air\Ammo\X-58.png" />
+    <None Remove="Assets\Image\Air\MIG-29.png" />
+    <None Remove="Assets\Image\Air\P-60.png" />
+    <None Remove="Assets\Image\Air\SU-24.png" />
+    <None Remove="Assets\Image\Air\SU-25.png" />
+    <None Remove="Assets\Image\Air\SU-27.png" />
     <None Remove="Assets\Image\Command.png" />
     <None Remove="Assets\Image\flag.gif" />
+    <None Remove="Assets\Image\Infarny\AK-74.png" />
+    <None Remove="Assets\Image\Infarny\T-72.png" />
+    <None Remove="Assets\Image\Infarny\t80.png" />
+    <None Remove="Assets\Image\Infarny\БМП-2.png" />
+    <None Remove="Assets\Image\Infarny\БМП-3.png" />
+    <None Remove="Assets\Image\Infarny\КТ-12_7.png" />
+    <None Remove="Assets\Image\Infarny\МТ-ЛБ.png" />
+    <None Remove="Assets\Image\Infarny\МТ-ЛБу.png" />
+    <None Remove="Assets\Image\Infarny\Стугна.png" />
+    <None Remove="Assets\Image\Infarny\Форт-221.png" />
     <None Remove="Assets\Image\Ministry.png" />
     <None Remove="Assets\Image\ВВС.png" />
     <None Remove="Assets\Image\ВМС.png" />
@@ -28,8 +54,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Image\Air\Ammo\P-73.png" />
+    <Resource Include="Assets\Image\Air\Ammo\R-27.png" />
+    <Resource Include="Assets\Image\Air\Ammo\X-58.png" />
+    <Resource Include="Assets\Image\Air\MIG-29.png" />
+    <Resource Include="Assets\Image\Air\P-60.png" />
+    <Resource Include="Assets\Image\Air\SU-24.png" />
+    <Resource Include="Assets\Image\Air\SU-25.png" />
+    <Resource Include="Assets\Image\Air\SU-27.png" />
     <Resource Include="Assets\Image\Command.png" />
     <Resource Include="Assets\Image\flag.gif" />
+    <Resource Include="Assets\Image\Infarny\AK-74.png" />
+    <Resource Include="Assets\Image\Infarny\T-72.png" />
+    <Resource Include="Assets\Image\Infarny\t80.png" />
+    <Resource Include="Assets\Image\Infarny\БМП-2.png" />
+    <Resource Include="Assets\Image\Infarny\БМП-3.png" />
+    <Resource Include="Assets\Image\Infarny\КТ-12_7.png" />
+    <Resource Include="Assets\Image\Infarny\МТ-ЛБ.png" />
+    <Resource Include="Assets\Image\Infarny\МТ-ЛБу.png" />
+    <Resource Include="Assets\Image\Infarny\Стугна.png" />
+    <Resource Include="Assets\Image\Infarny\Форт-221.png" />
     <Resource Include="Assets\Image\Ministry.png" />
     <Resource Include="Assets\Image\ВВС.png" />
     <Resource Include="Assets\Image\ВМС.png" />

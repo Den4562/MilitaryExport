@@ -31,23 +31,13 @@
             <Grid>
                 <Image x:Name="image1" Source="../Assets/Image/Ministry.png" Width="200" Height="250" HorizontalAlignment="Left" Margin="100,0,0,0" Opacity="0"/>
                 <Image x:Name="image2" Source="../Assets/Image/Command.png" Width="200" Height="250" HorizontalAlignment="Right" Margin="0,0,100,0" Opacity="0"/>
-                <Rectangle x:Name="line" Fill="Gray" Height="2" Width="0" Margin="0,-50,0,220" VerticalAlignment="Center" >
-                    <Rectangle.Triggers>
-                        <EventTrigger RoutedEvent="Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Width" To="750" Duration="0:0:0.6"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Rectangle.Triggers>
-                </Rectangle>
-                <TextBlock x:Name="textBlock" Text="Міністерство оборони України" Height="0" Width="260" Margin="20,0,400,-250" FontSize="18" Foreground="White">
+                
+                <TextBlock x:Name="textBlock" Padding="2" Text="Міністерство оборони України" Height="0" Width="260" Margin="20,0,400,-250" FontSize="18" Foreground="White">
                     <TextBlock.Background>
                         <SolidColorBrush Color="Gray"/>
                     </TextBlock.Background>
                 </TextBlock>
-                <TextBlock x:Name="textBlock2" Text="Генеральний штаб" Height="0" Width="160" Margin="20,0,-362,-250" FontSize="18" Foreground="White">
+                <TextBlock x:Name="textBlock2" Padding="2" Text="Генеральний штаб" Height="0" Width="160" Margin="20,0,-362,-250" FontSize="18" Foreground="White">
                     <TextBlock.Background>
                         <SolidColorBrush Color="gray"/>
                     </TextBlock.Background>

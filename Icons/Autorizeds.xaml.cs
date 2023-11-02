@@ -22,29 +22,35 @@ namespace WpfAppMilitaryExport.Icons
 
         }
 
-      
+
         private async void Enter_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
             string password = Pass.Password;
 
-            
-                bool isUserAuthenticated = await Authenticate(login, password);
+            bool isMinistryAuthenticated = await AuthenticateMinistry(login, password);
+            bool isCommandAuthenticated = await AuthenticateCommand(login, password);
 
-                if (isUserAuthenticated)
+            if (isMinistryAuthenticated || isCommandAuthenticated)
+            {
+                if (isMinistryAuthenticated)
                 {
-                    // Успешная аутентификация, переключитесь на окно Army_Request
-                    var armyRequestWindow = new Army_Request(); // Предполагается, что это ваше окно Army_Request
-                    NavigatorObject.Switch(armyRequestWindow);
+                    // Успешная аутентификация в таблице Account_Ministry
+                    var ministryWindow = new WinMinistry(); // Предполагается, что это ваше окно для Ministry
+                    NavigatorObject.Switch(ministryWindow);
                 }
                 else
                 {
-                    // Пользователь не найден, выполните действия по обработке ошибки
-                    ShowSnackbar("Ошибка аутентификации");
+                    // Успешная аутентификация в таблице Account_Command
+                    var commandWindow = new Army_Request(); // Предполагается, что это ваше окно для Command
+                    NavigatorObject.Switch(commandWindow);
                 }
-            
-            
-            
+            }
+            else
+            {
+                // Ошибка аутентификации
+                ShowSnackbar("Ошибка аутентификации");
+            }
 
             Login.Text = "";
             Pass.Password = "";
@@ -55,12 +61,22 @@ namespace WpfAppMilitaryExport.Icons
             messageQueue.Enqueue(message);
         }
 
-        private async Task<bool> Authenticate(string login, string password)
+        private async Task<bool> AuthenticateMinistry(string login, string password)
         {
             using (var context = new MilitaryDBContext())
             {
-                // Проверяем, существует ли пользователь с указанным логином и паролем
                 var user = await context.Account_Ministry.SingleOrDefaultAsync(u => u.Login == login && u.Password == password);
+
+                return user != null;
+            }
+        }
+
+        private async Task<bool> AuthenticateCommand(string login, string password)
+        {
+            using (var context = new MilitaryDBContext())
+            {
+                
+                var user = await context.Account_Command.SingleOrDefaultAsync(u => u.Login == login && u.Password == password);
 
                 return user != null;
             }

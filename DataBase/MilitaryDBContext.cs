@@ -19,6 +19,12 @@ namespace WpfAppMilitaryExport.DB
         public DbSet<Ground_forces_request> Ground_forces_request { get; set; }
         public DbSet<Infantry_equipment> Infantry_equipment { get; set; }
         public DbSet<Infarny_Weapon> Infarny_Weapon { get; set; }
+
+        public DbSet<Navy_Details> Navy_Details { get; set; }
+
+        public DbSet<Navy_forces_request> Navy_forces_request { get; set; }
+
+        public DbSet<Navy_Weapon> Navy_Weapon { get; set; }
         public DbSet<Order_Ministry_of_Defence> Order_Ministry_of_Defence { get; set; }
         public DbSet<Production> Production { get; set; }
         public DbSet<Account_Command> Account_Command { get; set; }

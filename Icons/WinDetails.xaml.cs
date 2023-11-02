@@ -21,15 +21,13 @@ using WpfAppMilitaryExport.Navigator;
 namespace WpfAppMilitaryExport.Icons
 {
     /// <summary>
-    /// Логика взаимодействия для WinAir.xaml
+    /// Логика взаимодействия для WinDetails.xaml
     /// </summary>
-    public partial class WinAir : UserControl
+    public partial class WinDetails : UserControl
     {
-        public WinAir()
+        public WinDetails()
         {
             InitializeComponent();
-           
-
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -37,10 +35,10 @@ namespace WpfAppMilitaryExport.Icons
             using (var context = new MilitaryDBContext())
             {
                 // Отключаем триггер
-                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateAirplaneTotalCost ON Airplane");
+                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateAirDetailsTotalCost ON Details");
 
                 // Создаем новый объект Airplane на основе введенных данных
-                var newAirplane = new Airplane
+                var newDetails = new Details
                 {
                     Name = txtName.Text,
                     Count = int.Parse(txtCount.Text),
@@ -49,11 +47,11 @@ namespace WpfAppMilitaryExport.Icons
                 };
 
                 // Добавляем новый самолет в контекст и сохраняем изменения в базе данных
-                context.Airplane.Add(newAirplane);
+                context.Details.Add(newDetails);
                 context.SaveChanges();
 
                 // Включаем триггер обратно
-                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateAirplaneTotalCost ON Airplane");
+                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateAirDetailsTotalCost ON Details");
 
                 // Очищаем поля ввода
                 txtName.Clear();
@@ -64,16 +62,15 @@ namespace WpfAppMilitaryExport.Icons
             }
 
 
-
-
         }
 
-        private void bt_DetailsClick(object sender, RoutedEventArgs e)
+        private void bt_AirClick(object sender, RoutedEventArgs e)
         {
-            var win_details = new WinDetails();
-            NavigatorObject.Switch(win_details);
+            var win_air = new WinAir();
+            NavigatorObject.Switch(win_air);
         }
-       
+
+
         private void click_Main(object sender, RoutedEventArgs e)
         {
             var main = new Army_Request();
@@ -86,20 +83,6 @@ namespace WpfAppMilitaryExport.Icons
             NavigatorObject.Switch(exit);
         }
 
-        private void bt_AmmoClick(object sender, RoutedEventArgs e)
-        {
-            var win_ammo = new WinAmmo();
-            NavigatorObject.Switch(win_ammo);
-        }
-
-        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            if (sender is TreeViewItem selectedItem)
-            {
-                // Получите текст выбранного элемента и установите его в поле txtName
-                txtName.Text = selectedItem.Header.ToString();
-            }
-        }
 
         private void CreateQuery_Click(object sender, RoutedEventArgs e)
         {
@@ -157,7 +140,12 @@ namespace WpfAppMilitaryExport.Icons
                 MessageBox.Show("Ошибка при создании записи: " + ex.Message);
             }
         }
+        private void bt_AmmoClick(object sender, RoutedEventArgs e)
+        {
+            var win_ammo = new WinAmmo();
+            NavigatorObject.Switch(win_ammo);
+        }
 
-
+      
     }
 }

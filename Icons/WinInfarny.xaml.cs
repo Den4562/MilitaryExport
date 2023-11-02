@@ -17,19 +17,16 @@ using System.Windows.Shapes;
 using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
 using WpfAppMilitaryExport.Navigator;
-
 namespace WpfAppMilitaryExport.Icons
 {
     /// <summary>
-    /// Логика взаимодействия для WinAir.xaml
+    /// Логика взаимодействия для WinInfarny.xaml
     /// </summary>
-    public partial class WinAir : UserControl
+    public partial class WinInfarny : UserControl
     {
-        public WinAir()
+        public WinInfarny()
         {
             InitializeComponent();
-           
-
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -37,10 +34,10 @@ namespace WpfAppMilitaryExport.Icons
             using (var context = new MilitaryDBContext())
             {
                 // Отключаем триггер
-                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateAirplaneTotalCost ON Airplane");
+                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER Infantry_equipmentTotalCost ON Infantry_equipment");
 
                 // Создаем новый объект Airplane на основе введенных данных
-                var newAirplane = new Airplane
+                var newInfantry = new Infantry_equipment()
                 {
                     Name = txtName.Text,
                     Count = int.Parse(txtCount.Text),
@@ -49,11 +46,11 @@ namespace WpfAppMilitaryExport.Icons
                 };
 
                 // Добавляем новый самолет в контекст и сохраняем изменения в базе данных
-                context.Airplane.Add(newAirplane);
+                context.Infantry_equipment.Add(newInfantry);
                 context.SaveChanges();
 
                 // Включаем триггер обратно
-                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateAirplaneTotalCost ON Airplane");
+                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER Infantry_equipmentTotalCost ON Infantry_equipment");
 
                 // Очищаем поля ввода
                 txtName.Clear();
@@ -68,12 +65,12 @@ namespace WpfAppMilitaryExport.Icons
 
         }
 
-        private void bt_DetailsClick(object sender, RoutedEventArgs e)
+        private void bt_WeaponClick(object sender, RoutedEventArgs e)
         {
-            var win_details = new WinDetails();
-            NavigatorObject.Switch(win_details);
+            var win_weapon = new WinWeapon();
+            NavigatorObject.Switch(win_weapon);
         }
-       
+
         private void click_Main(object sender, RoutedEventArgs e)
         {
             var main = new Army_Request();
@@ -86,11 +83,6 @@ namespace WpfAppMilitaryExport.Icons
             NavigatorObject.Switch(exit);
         }
 
-        private void bt_AmmoClick(object sender, RoutedEventArgs e)
-        {
-            var win_ammo = new WinAmmo();
-            NavigatorObject.Switch(win_ammo);
-        }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
@@ -105,45 +97,39 @@ namespace WpfAppMilitaryExport.Icons
         {
             try
             {
-                // Создайте подключение к базе данных (используйте свой метод подключения)
+
                 using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-N5K3CGS\\SQLEXPRESS01;Initial Catalog=MilitaryExport;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"))
                 {
                     connection.Open();
 
-                    // Получите последние значения AirplaneId, AmmoId и DetailsId из таблиц Airplane, Ammo и Details
-                    int selectedAirplaneId;
-                    int selectedAmmoId;
-                    int selectedDetailsId;
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Airplane ORDER BY Id DESC", connection))
+                    int Infarny_weaponId;
+                    int Infantry_equipmentId;
+
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Infarny_Weapon ORDER BY Id DESC", connection))
                     {
-                        selectedAirplaneId = (int)cmd.ExecuteScalar();
+                        Infarny_weaponId = (int)cmd.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Ammo ORDER BY Id DESC", connection))
+                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Infantry_equipment ORDER BY Id DESC", connection))
                     {
-                        selectedAmmoId = (int)cmd.ExecuteScalar();
+                        Infantry_equipmentId = (int)cmd.ExecuteScalar();
                     }
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Details ORDER BY Id DESC", connection))
-                    {
-                        selectedDetailsId = (int)cmd.ExecuteScalar();
-                    }
 
-                    // Создайте SQL-запрос для вставки новой записи в таблицу Air_forces_request
-                    string insertQuery = "INSERT INTO Air_forces_request (AirplaneId, AmmoId, DetailsId, Cost) " +
-                                         "VALUES (@AirplaneId, @AmmoId, @DetailsId, 0)";
+
+                    string insertQuery = "INSERT INTO Ground_forces_request (Infarny_WeaponId, Infantry_equipmentId, Cost) " +
+                                         "VALUES (@Infarny_WeaponId, @Infantry_equipmentId, 0)";
 
                     using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
                     {
-                        cmd.Parameters.AddWithValue("@AirplaneId", selectedAirplaneId);
-                        cmd.Parameters.AddWithValue("@AmmoId", selectedAmmoId);
-                        cmd.Parameters.AddWithValue("@DetailsId", selectedDetailsId);
-
+                        cmd.Parameters.AddWithValue("@Infarny_WeaponId", Infarny_weaponId);
+                        cmd.Parameters.AddWithValue("@Infantry_equipmentId", Infantry_equipmentId);
 
                         // Выполните SQL-запрос
                         cmd.ExecuteNonQuery();
-                        string triggerQuery = "UPDATE Air_forces_request SET Cost = 0 WHERE Id = SCOPE_IDENTITY()"; // Используйте SCOPE_IDENTITY() для получения ID только что вставленной записи
+                        string triggerQuery = "UPDATE Ground_forces_request SET Cost = 0 WHERE Id = SCOPE_IDENTITY()"; // Используйте SCOPE_IDENTITY() для получения ID только что вставленной записи
                         using (SqlCommand triggerCmd = new SqlCommand(triggerQuery, connection))
                         {
                             triggerCmd.ExecuteNonQuery();
@@ -157,7 +143,5 @@ namespace WpfAppMilitaryExport.Icons
                 MessageBox.Show("Ошибка при создании записи: " + ex.Message);
             }
         }
-
-
     }
 }
