@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfAppMilitaryExport.DataBase.Table;
-using WpfAppMilitaryExport.DataBase.Table.Army_Order;
+
 
 namespace WpfAppMilitaryExport.DB
 {

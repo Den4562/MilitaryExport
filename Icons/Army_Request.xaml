@@ -28,7 +28,7 @@
         <Grid Margin="0,90,0,0">
             <Grid Margin="20">
               
-                <Border Margin="10" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                <Border Margin="10" BorderBrush="FloralWhite" BorderThickness="2" CornerRadius="5">
                      
                     <Image  Width="200" Height="250" HorizontalAlignment="Left" Margin="20,0,0,0">
                         <Image.Source>
@@ -45,18 +45,18 @@
 
             <Grid Margin="0,0,0,-14">
                 <Image x:Name="image4" Source="../Assets/Image/Command.png" Height="54" Width="86" HorizontalAlignment="Center" Margin="0,0,0,18"/>
-                <Menu HorizontalAlignment="left" materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="0,5,0,0">
-                    <!-- Применение стиля к элементам меню -->
-                    <MenuItem Header="ВМС" Style="{StaticResource MenuItemStyle}">
+                <Menu HorizontalAlignment="left"  materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="20,15,0,0">
+         
+                    <MenuItem Foreground="LightGray" Header="ВМС" Style="{StaticResource MenuItemStyle}">
                         <MenuItem Header="Деталі" Margin="10,0,0,0" Click="MenuNavyDetails_Click"/>
                         <MenuItem Header="Озброєння" Margin="10,0,0,0" Click="MenuNavyWeapon_Click"/>
                     </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="ПЗС" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Foreground="LightGray" Margin="10,0,0,0" Header="ПЗС" Style="{StaticResource MenuItemStyle}">
                         <MenuItem Header="Літаки" Margin="10,0,0,0" Click="MenuAir_Click"  />
                         <MenuItem Header="Детали" Margin="10,0,0,0" Click="MenuDetails_Click"/>
                         <MenuItem Header="Боєприпаси"  Margin="10,0,0,0" Click="MenuAmmo_Click"/>
                     </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="Сухопутні Сили" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Foreground="LightGray" Margin="10,0,0,0" Header="Сухопутні Сили" Style="{StaticResource MenuItemStyle}">
                         <MenuItem Header="Піхотне спорядження" Margin="10,0,0,0" Click="MenuInfarny_Click" />
                         <MenuItem Header="Техника" Margin="10,0,0,0" Click="MenuWeapon_Click"/>
 
@@ -69,7 +69,7 @@
                 <materialDesign:Card Background="DimGray" HorizontalAlignment="Right" Height="40" Margin="0,0,30,20">
                     <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
 
-                        <MenuItem   Header="Меню">
+                        <MenuItem  Foreground="LightGray"  Header="Меню">
                             <MenuItem Header="Вихід"  Click="Click_Exit"/>
                             <MenuItem Header="Відправити запит до Міністерства оборони" Click="CreateQuery_Click"/>
                         </MenuItem>

@@ -22,6 +22,13 @@ namespace WpfAppMilitaryExport.Icons
 
         }
 
+        private void bt_MainClick(object sender, RoutedEventArgs e)
+        {
+            var exit = new MainWindow();
+            NavigatorObject.Switch(exit);
+        }
+
+
 
         private async void Enter_Click(object sender, RoutedEventArgs e)
         {

@@ -47,14 +47,14 @@
             Mode="Custom" Height="auto" Width="auto">
                 <StackPanel Orientation="Horizontal" >
                     <Image Source="../Assets/Image/Command.png" Height="54" Width="auto" Margin="0,0,0,0"/>
-                    <Button  Content="Техніка"  Width="80" Height="30" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" Click="bt_WeaponClick"
+                    <Button Foreground="LightGray" Content="Техніка"  Width="80" Height="30" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" Click="bt_WeaponClick"
                      Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="left" Margin="10,-10,10,-10" VerticalAlignment="Center" />
                 </StackPanel>
             </materialDesign:ColorZone>
-            <materialDesign:Card Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="350,0,0,20">
+            <materialDesign:Card Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="0,0,20,0">
                 <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
 
-                    <MenuItem   Header="Меню">
+                    <MenuItem Foreground="LightGray"  Header="Меню">
                         <MenuItem Header="Головна" Click="click_Main" />
                         <MenuItem Header="Вихід"  Click="click_Exit"/>
                         <MenuItem Header="Створити запит" Click="CreateQuery_Click"/>

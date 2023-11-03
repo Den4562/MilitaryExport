@@ -40,7 +40,7 @@
         </Grid.RowDefinitions>
         <materialDesign:Card Grid.Row="0" Grid.Column="1" Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="0,0,30,0">
             <Menu   materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
-                <MenuItem   Header="Меню">
+                <MenuItem Foreground="LightGray"  Header="Меню">
                     <MenuItem Header="Головна" Click="click_Main" />
                     <MenuItem Header="Вихід"  Click="click_Exit"/>
                     <MenuItem Header="Оформити запит ГШ ЗСУ" Click="CreateQuery_Click"/>
@@ -49,11 +49,15 @@
 
             </Menu>
         </materialDesign:Card>
-        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Content="Поточнi замовлення" Margin="20,10,10,10" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" />
-        <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Content="ВМС" Margin="20,10,10,10" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showNavy"/>
+        <Image x:Name="image1" Grid.RowSpan="3" Grid.ColumnSpan="2"  Grid.Row="0" Source="../Assets/Image/Ministry.png" Width="100" Height="150" HorizontalAlignment="Center" Margin="9,0,10,300" Opacity="100"/>
+        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Content="Запити вiд ГШ ЗСУ" Margin="20,10,10,10" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" Click="bt_showMinistry"/>
+        <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Content="ВМС" Margin="20,10,10,10" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showNavy" Cursor="Hand"/>
         <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Content="ПСУ" Margin="160,10,10,10" Width="110"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showAir"/>
         <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Content="СВУ" Margin="20,10,10,10" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showGround"/>
+        
         <DataGrid Grid.Column="0" x:Name="DataTable" Grid.Row="2" Grid.ColumnSpan="1" Style="{StaticResource MaterialDesignDataGrid}" Margin="20,60,30,30" BorderThickness="0" IsReadOnly="True" GridLinesVisibility="None" />
         <DataGrid Grid.Column="1" x:Name="DataTable2" Grid.Row="2" Grid.ColumnSpan="1" Style="{StaticResource MaterialDesignDataGrid}" Margin="20,60,20,30" BorderThickness="0" IsReadOnly="True" GridLinesVisibility="None"/>
+        <Label Content="Запити родiв вiйськ" FontSize="16" Foreground="LightGray" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="Запити ГШ ЗСУ" FontSize="16" Foreground="LightGray" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

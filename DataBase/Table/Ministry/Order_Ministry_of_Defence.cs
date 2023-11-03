@@ -13,6 +13,8 @@ namespace WpfAppMilitaryExport.DataBase.Table
         {
         }
 
+        public Army_Order Army_Order { get; set; }
+
         public Order_Ministry_of_Defence(int id, int armyOrderId, DateTime startDate, DateTime endDate)
         {
             Id = id;

@@ -19,7 +19,6 @@ using WpfAppMilitaryExport.Icons;
 using WpfAppMilitaryExport.Navigator;
 using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
-using WpfAppMilitaryExport.DataBase.Table.Army_Order;
 
 namespace WpfAppMilitaryExport.Icons
 {
@@ -87,6 +86,25 @@ namespace WpfAppMilitaryExport.Icons
                 DataTable.ItemsSource = result;
             }
         }
+
+        private void LoadMinistry()
+        {
+            using (var context = new MilitaryDBContext())
+            {
+                var result = context.Order_Ministry_of_Defence
+                    .Include(omod => omod.Army_Order) 
+                    .Select(omod => new
+                    {
+                        RequestId = omod.Id,
+                        ArmyOrderName = omod.Army_OrderID, // Замените Army_Order.Name на соответствующее поле
+                        StartDate = omod.StartDate
+                    })
+                    .ToList();
+
+                DataTable2.ItemsSource = result;
+            }
+        }
+
 
         private void LoadAir()
         {
@@ -166,6 +184,12 @@ namespace WpfAppMilitaryExport.Icons
         {
             LoadNavy();
         }
+
+        private void bt_showMinistry(object sender, RoutedEventArgs e)
+        {
+            LoadMinistry();
+        }
+
         private void bt_showAir(object sender, RoutedEventArgs e)
         {
             LoadAir();

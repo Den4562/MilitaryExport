@@ -17,7 +17,7 @@
             <GradientStop Color="#131b28" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.Background>
             <StaticResource ResourceKey="PageBackground"/>
@@ -30,7 +30,7 @@
 
                     <materialDesign:HintAssist.Hint>
 
-                        <TextBlock Text="Login" />
+                        <TextBlock Text="Логiн" />
                     </materialDesign:HintAssist.Hint>
 
                 </TextBox>
@@ -39,15 +39,17 @@
 
             <StackPanel Canvas.Bottom="200" Canvas.Left="285"  Canvas.Top="189" Width="200" >
                 <materialDesign:PackIcon  Background="White"  Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" Kind="LockOutline" />
-                <PasswordBox x:Name="Pass" BorderBrush="White" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" />
+                <PasswordBox x:Name="Pass" BorderBrush="White" materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignFilledPasswordBox}" />
             </StackPanel>
 
-            <Button x:Name="Enter" Content="Log in" Canvas.Bottom="100" Canvas.Left="260" Width="250" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
+            <Button x:Name="Enter" Content="Увiйти" Canvas.Bottom="100" Canvas.Left="260" Width="250" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
                  Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Canvas.Top="270" VerticalAlignment="Center" Click="Enter_Click"/>
+            <Button  Content="Головна сторiнка" Canvas.Bottom="100" Canvas.Left="260" Width="250" Height="40" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" 
+      Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Center" Canvas.Top="341" VerticalAlignment="Top" Click="bt_MainClick"/>
 
 
             <materialDesign:Snackbar x:Name="Snackbar" Canvas.Left="241" Canvas.Top="22">
-                <materialDesign:SnackbarMessage Content="Успешный вход!" Foreground="White"/>
+                <materialDesign:SnackbarMessage Content="Успiшний вхiд!" Foreground="White"/>
             </materialDesign:Snackbar>
 
         </Canvas>

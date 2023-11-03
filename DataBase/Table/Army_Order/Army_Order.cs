@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfAppMilitaryExport.DataBase.Table.Army_Order
+namespace WpfAppMilitaryExport.DataBase.Table
 {
-    class Army_Order
+  public  class Army_Order
     {
         public int Id { get; set; }
         public int Ground_forces_requestId { get; set; }
