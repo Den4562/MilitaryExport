@@ -13,6 +13,9 @@ namespace WpfAppMilitaryExport.DataBase.Table
         {
         }
 
+        public Navy_Weapon Navy_Weapon { get; set; } // Навигационное свойство на Navy_Weapon
+        public Navy_Details Navy_Details { get; set; } //
+
         public Navy_forces_request(int id, int navy_WeaponId, int navy_DetailsId, decimal cost)
         {
             Id = id;

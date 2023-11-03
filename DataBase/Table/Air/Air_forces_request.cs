@@ -14,6 +14,11 @@ namespace WpfAppMilitaryExport.DataBase.Table
         {
         }
 
+        public Airplane Airplane { get; set; } // Навигационное свойство на Navy_Weapon
+        public Ammo Ammo { get; set; } //
+        public Details Details { get; set; } //
+
+
         public Air_forces_request(int id, int airplaneId, int ammoId, int detailsId, decimal cost)
         {
             Id = id;

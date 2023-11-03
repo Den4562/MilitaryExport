@@ -21,63 +21,39 @@
 
     </UserControl.Resources>
     <Grid>
+        <Grid.Background>
+            <StaticResource ResourceKey="PageBackground"/>
+        </Grid.Background>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
 
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <materialDesign:ColorZone Width="auto" Height="50" Mode="Inverted" Grid.Column="0" Grid.ColumnSpan="3" >
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
             
-            <Grid Margin="0,0,0,-14">
-                <Grid.Background>
-                    <StaticResource ResourceKey="PageBackground"/>
-                </Grid.Background>
-                <Menu HorizontalAlignment="Center" materialDesign:MenuAssist.TopLevelMenuItemHeight="25" Margin="0,5,0,0">
-                    <!-- Применение стиля к элементам меню -->
-                    <MenuItem Header="ВМС" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem Header="Деталі" Margin="10,0,0,0" Click="bt_showDetails"/>
-                        <MenuItem Header="Озброєння" Margin="10,0,0,0"/>
-                    </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="ПЗС" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem Header="Літаки" Margin="10,0,0,0"   />
-                        <MenuItem Header="Детали" Margin="10,0,0,0" />
-                        <MenuItem Header="Боєприпаси"  Margin="10,0,0,0" />
-                    </MenuItem>
-                    <MenuItem Margin="10,0,0,0" Header="Сухопутні Сили" Style="{StaticResource MenuItemStyle}">
-                        <MenuItem Header="Піхотне спорядження" Margin="10,0,0,0" />
-                        <MenuItem Header="Техника" Margin="10,0,0,0"/>
-
-                    </MenuItem>
-                </Menu>
-                <materialDesign:Card  HorizontalAlignment="Right" Margin="0,0,0,10" Height="40">
-                    <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}"/>
-                </materialDesign:Card>
-
-                <materialDesign:Card Background="DimGray" HorizontalAlignment="Right" Height="40" Margin="0,0,30,20">
-                    <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
-
-                        <MenuItem   Header="Меню">
-                            <MenuItem Header="Вихід"  Click="Click_Exit"/>
-                        
-                        </MenuItem>
+            
+        </Grid.RowDefinitions>
+        <materialDesign:Card Grid.Row="0" Grid.Column="1" Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="0,0,30,0">
+            <Menu   materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+                <MenuItem   Header="Меню">
+                    <MenuItem Header="Головна" Click="click_Main" />
+                    <MenuItem Header="Вихід"  Click="click_Exit"/>
+                    <MenuItem Header="Оформити запит ГШ ЗСУ" Click="CreateQuery_Click"/>
+                </MenuItem>
 
 
-                    </Menu>
-                </materialDesign:Card>
-            </Grid>
-
-        </materialDesign:ColorZone>
-
-        <Border BorderBrush="DimGray" Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="3" BorderThickness="1" CornerRadius="0" Margin="0,0,0,0">
-            <DataGrid Grid.Column="0" Margin="10" x:Name="DataTable" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignDataGrid}" >
-           
-            </DataGrid>
-        </Border>
-        
-       
+            </Menu>
+        </materialDesign:Card>
+        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Content="Поточнi замовлення" Margin="20,10,10,10" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" />
+        <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Content="ВМС" Margin="20,10,10,10" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showNavy"/>
+        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Content="ПСУ" Margin="160,10,10,10" Width="110"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showAir"/>
+        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Content="СВУ" Margin="20,10,10,10" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Click="bt_showGround"/>
+        <DataGrid Grid.Column="0" x:Name="DataTable" Grid.Row="2" Grid.ColumnSpan="1" Style="{StaticResource MaterialDesignDataGrid}" Margin="20,60,30,30" BorderThickness="0" IsReadOnly="True" GridLinesVisibility="None" />
+        <DataGrid Grid.Column="1" x:Name="DataTable2" Grid.Row="2" Grid.ColumnSpan="1" Style="{StaticResource MaterialDesignDataGrid}" Margin="20,60,20,30" BorderThickness="0" IsReadOnly="True" GridLinesVisibility="None"/>
     </Grid>
 </UserControl>

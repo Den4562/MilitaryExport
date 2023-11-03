@@ -26,7 +26,6 @@ namespace WpfAppMilitaryExport.DB
 
         public DbSet<Navy_Weapon> Navy_Weapon { get; set; }
         public DbSet<Order_Ministry_of_Defence> Order_Ministry_of_Defence { get; set; }
-        public DbSet<Production> Production { get; set; }
         public DbSet<Account_Command> Account_Command { get; set; }
         public DbSet<Account_Ministry> Account_Ministry { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

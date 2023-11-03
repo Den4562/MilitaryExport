@@ -55,8 +55,8 @@
 Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,-10,10,-10" VerticalAlignment="Center" />
 
 
-                    <materialDesign:Card Background="DimGray" HorizontalAlignment="Right" Margin="350,0,0,0">
-                        <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+                    <materialDesign:Card Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="350,0,0,20">
+                        <Menu   materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
                             <MenuItem   Header="Меню">
                                 <MenuItem Header="Головна" Click="click_Main" />
                                 <MenuItem Header="Вихід"  Click="click_Exit"/>
