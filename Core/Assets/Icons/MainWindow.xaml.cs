@@ -17,18 +17,18 @@ namespace WpfAppMilitaryExport.Icons
             InitializeImageAnimation("image1", "textBlock", TextBlock.HeightProperty, TimeSpan.FromSeconds(0.3));
             InitializeImageAnimation("image2", "textBlock2", TextBlock.HeightProperty, TimeSpan.FromSeconds(0.3));
 
-            ImageBehavior.SetAnimatedSource(gifImage, new BitmapImage(new Uri("pack://application:,,,/Assets/Image/flag.gif")));
+            ImageBehavior.SetAnimatedSource(gifImage, new BitmapImage(new Uri("pack://application:,,,/Core/Assets/Image/MainImages/flag.gif")));
             ImageBehavior.SetRepeatBehavior(gifImage, new RepeatBehavior(0));
             image2.MouseLeftButtonDown += (sender, e) =>
             {
-                // Переключитесь на страницу Autorized
-                var authorizedPage = new Autorizeds(); // Предполагается, что Autorized - это UserControl для новой страницы
+                
+                var authorizedPage = new Autorizeds(); 
                 NavigatorObject.Switch(authorizedPage);
             };
             image1.MouseLeftButtonDown += (sender, e) =>
             {
-                // Переключитесь на страницу Autorized
-                var authorizedPage = new Autorizeds(); // Предполагается, что Autorized - это UserControl для новой страницы
+                
+                var authorizedPage = new Autorizeds(); 
                 NavigatorObject.Switch(authorizedPage);
             };
         }

@@ -1,19 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
 using WpfAppMilitaryExport.Navigator;
@@ -21,11 +10,11 @@ using WpfAppMilitaryExport.Navigator;
 namespace WpfAppMilitaryExport.Icons
 {
     /// <summary>
-    /// Логика взаимодействия для WinAmmo.xaml
+    /// Логика взаимодействия для WinDetails.xaml
     /// </summary>
-    public partial class WinAmmo : UserControl
+    public partial class WinDetails : UserControl
     {
-        public WinAmmo()
+        public WinDetails()
         {
             InitializeComponent();
         }
@@ -34,11 +23,11 @@ namespace WpfAppMilitaryExport.Icons
         {
             using (var context = new MilitaryDBContext())
             {
-                // Отключаем триггер
-                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateAmmoTotalCost ON Ammo");
+           
+                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateAirDetailsTotalCost ON Details");
 
-                // Создаем новый объект Airplane на основе введенных данных
-                var newAmmo = new Ammo
+        
+                var newDetails = new Details
                 {
                     Name = txtName.Text,
                     Count = int.Parse(txtCount.Text),
@@ -46,19 +35,19 @@ namespace WpfAppMilitaryExport.Icons
                     Total_Cost = int.Parse(txtCount.Text) * decimal.Parse(txtUnitCost.Text)
                 };
 
-                // Добавляем новый самолет в контекст и сохраняем изменения в базе данных
-                context.Ammo.Add(newAmmo);
+              
+                context.Details.Add(newDetails);
                 context.SaveChanges();
 
-                // Включаем триггер обратно
-                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateAmmoTotalCost ON Ammo");
+             
+                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateAirDetailsTotalCost ON Details");
 
-                // Очищаем поля ввода
+          
                 txtName.Clear();
                 txtCount.Clear();
                 txtUnitCost.Clear();
 
-                // Обновляем отображение списка самолетов или выполните другие необходимые действия
+           
             }
 
 
@@ -83,11 +72,6 @@ namespace WpfAppMilitaryExport.Icons
             NavigatorObject.Switch(exit);
         }
 
-        private void bt_DetailsClick(object sender, RoutedEventArgs e)
-        {
-            var win_details = new WinDetails();
-            NavigatorObject.Switch(win_details);
-        }
 
         private void CreateQuery_Click(object sender, RoutedEventArgs e)
         {
@@ -145,13 +129,12 @@ namespace WpfAppMilitaryExport.Icons
                 MessageBox.Show("Ошибка при создании записи: " + ex.Message);
             }
         }
-        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        private void bt_AmmoClick(object sender, RoutedEventArgs e)
         {
-            if (sender is TreeViewItem selectedItem)
-            {
-                // Получите текст выбранного элемента и установите его в поле txtName
-                txtName.Text = selectedItem.Header.ToString();
-            }
+            var win_ammo = new WinAmmo();
+            NavigatorObject.Switch(win_ammo);
         }
+
+      
     }
 }

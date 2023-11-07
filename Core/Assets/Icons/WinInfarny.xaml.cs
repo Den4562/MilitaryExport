@@ -1,31 +1,19 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
 using WpfAppMilitaryExport.Navigator;
-
 namespace WpfAppMilitaryExport.Icons
 {
     /// <summary>
-    /// Логика взаимодействия для WinWeapon.xaml
+    /// Логика взаимодействия для WinInfarny.xaml
     /// </summary>
-    public partial class WinWeapon : UserControl
+    public partial class WinInfarny : UserControl
     {
-        public WinWeapon()
+        public WinInfarny()
         {
             InitializeComponent();
         }
@@ -34,11 +22,11 @@ namespace WpfAppMilitaryExport.Icons
         {
             using (var context = new MilitaryDBContext())
             {
-                // Отключаем триггер
-                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER Infarny_WeaponTotalCost ON Infarny_Weapon");
+       
+                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER Infantry_equipmentTotalCost ON Infantry_equipment");
 
-                // Создаем новый объект Airplane на основе введенных данных
-                var newWeapon = new Infarny_Weapon()
+           
+                var newInfantry = new Infantry_equipment()
                 {
                     Name = txtName.Text,
                     Count = int.Parse(txtCount.Text),
@@ -46,19 +34,18 @@ namespace WpfAppMilitaryExport.Icons
                     Total_Cost = int.Parse(txtCount.Text) * decimal.Parse(txtUnitCost.Text)
                 };
 
-                // Добавляем новый самолет в контекст и сохраняем изменения в базе данных
-                context.Infarny_Weapon.Add(newWeapon);
+           
+                context.Infantry_equipment.Add(newInfantry);
                 context.SaveChanges();
 
-                // Включаем триггер обратно
-                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER Infarny_WeaponTotalCost ON Infarny_Weapon");
+          
+                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER Infantry_equipmentTotalCost ON Infantry_equipment");
 
-                // Очищаем поля ввода
                 txtName.Clear();
                 txtCount.Clear();
                 txtUnitCost.Clear();
 
-                // Обновляем отображение списка самолетов или выполните другие необходимые действия
+          
             }
 
 
@@ -66,10 +53,10 @@ namespace WpfAppMilitaryExport.Icons
 
         }
 
-        private void bt_InfantryClick(object sender, RoutedEventArgs e)
+        private void bt_WeaponClick(object sender, RoutedEventArgs e)
         {
-            var win_infantry = new WinInfarny();
-            NavigatorObject.Switch(win_infantry);
+            var win_weapon = new WinWeapon();
+            NavigatorObject.Switch(win_weapon);
         }
 
         private void click_Main(object sender, RoutedEventArgs e)
@@ -89,7 +76,7 @@ namespace WpfAppMilitaryExport.Icons
         {
             if (sender is TreeViewItem selectedItem)
             {
-          
+                // Получите текст выбранного элемента и установите его в поле txtName
                 txtName.Text = selectedItem.Header.ToString();
             }
         }
@@ -98,15 +85,15 @@ namespace WpfAppMilitaryExport.Icons
         {
             try
             {
-                
+
                 using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-N5K3CGS\\SQLEXPRESS01;Initial Catalog=MilitaryExport;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"))
                 {
                     connection.Open();
 
-                   
+
                     int Infarny_weaponId;
                     int Infantry_equipmentId;
-          
+
 
                     using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 Id FROM Infarny_Weapon ORDER BY Id DESC", connection))
                     {
@@ -118,8 +105,8 @@ namespace WpfAppMilitaryExport.Icons
                         Infantry_equipmentId = (int)cmd.ExecuteScalar();
                     }
 
-                   
-                   
+
+
                     string insertQuery = "INSERT INTO Ground_forces_request (Infarny_WeaponId, Infantry_equipmentId, Cost) " +
                                          "VALUES (@Infarny_WeaponId, @Infantry_equipmentId, 0)";
 

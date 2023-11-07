@@ -1,15 +1,14 @@
-﻿<UserControl x:Class="WpfAppMilitaryExport.Icons.WinAmmo"
+﻿<UserControl x:Class="WpfAppMilitaryExport.Icons.WinInfarny"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextElement.Foreground="LightGray"
-             TextElement.FontWeight="Regular"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              TextElement.Foreground="LightGray"
+            TextElement.FontWeight="Regular"
              xmlns:local="clr-namespace:WpfAppMilitaryExport.Icons"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="800">
-
     <UserControl.Resources>
 
         <LinearGradientBrush x:Key="PageBackground" StartPoint="0,0" EndPoint="0,1">
@@ -40,35 +39,25 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <materialDesign:ColorZone
-            Padding="16"
-            Background="Black"
-            ClipToBounds="False"
-            Foreground="White"
-            Mode="Custom" Height="auto" Width="auto">
+            <materialDesign:ColorZone  Background="Black" ClipToBounds="False" Foreground="White"  Mode="Custom" Height="auto" Width="auto">
                 <StackPanel Orientation="Horizontal" >
-                    <Image  Source="../Assets/Image/ВВС.png" Height="54" Width="auto" Margin="0,0,0,0"/>
-                    <Button Foreground="LightGray" Content="Деталі"  Width="80" Height="30" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" Click="bt_DetailsClick"
-     Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="left" Margin="10,-10,10,-10" VerticalAlignment="Center" />
-                    <Button Foreground="LightGray" Content="Літаки"  Width="120" Height="30" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" Click="bt_AirClick"
-Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,-10,10,-10" VerticalAlignment="Center" />
-
-
-                    <materialDesign:Card Height="20" Background="DimGray" HorizontalAlignment="Right" Margin="380,0,0,0">
-                        <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
-
-                            <MenuItem Foreground="LightGray"  Header="Меню">
-                                <MenuItem Header="Головна" Click="click_Main" />
-                                <MenuItem Header="Вихід"  Click="click_Exit"/>
-                                <MenuItem Header="Створити запит" Click="CreateQuery_Click"/>
-                            </MenuItem>
-
-
-                        </Menu>
-                    </materialDesign:Card>
-
+                    <Image Source="../Image/MainImages/Сухопутні сили.png" Height="54" Width="auto" Margin="0,0,0,0"/>
+                    <Button Foreground="LightGray" Content="Техніка"  Width="80" Height="30" materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5" Click="bt_WeaponClick"
+                     Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" HorizontalAlignment="left" Margin="10,-10,10,-10" VerticalAlignment="Center" />
                 </StackPanel>
+                
             </materialDesign:ColorZone>
+            <materialDesign:Card Height="20" Background="LightGray" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+
+                    <MenuItem Foreground="LightSlateGray"  Header="Меню">
+                        <MenuItem Header="Головна" Click="click_Main" />
+                        <MenuItem Header="Вихід"  Click="click_Exit"/>
+                        <MenuItem Header="Створити запит" Click="CreateQuery_Click"/>
+                    </MenuItem>
+                </Menu>
+            </materialDesign:Card>
+
             <TreeView Grid.Row="1" Margin="10" Width="260" HorizontalAlignment="Left" Style="{StaticResource GrayTreeViewStyle}">
                 <materialDesign:TreeViewAssist.AdditionalTemplate>
                     <DataTemplate>
@@ -76,31 +65,28 @@ Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" Horizontal
                         </materialDesign:ColorZone>
                     </DataTemplate>
                 </materialDesign:TreeViewAssist.AdditionalTemplate>
-                <TreeViewItem Header="Боєприпаси для літаків" >
-                    <TreeViewItem Header="   P-60" Selected="TreeViewItem_Selected">
+
+                <TreeViewItem Header="Піхотна зброя"  >
+                    <TreeViewItem Header=" Ak-74" Selected="TreeViewItem_Selected">
                         <TreeViewItem.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="../Assets/Image/Air/P-60.png" Width="80" Height="50" Margin="-4,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="202.271"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                    </Image>
+
+                                    <Image Grid.Column="0" Grid.Row="0" Source="../Image/Infarny/AK-74.png" Width="100" Height="50" Margin="4" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding}" Grid.Column="1" VerticalAlignment="Center" />
                                 </Grid>
                             </DataTemplate>
+                            
+                            
                         </TreeViewItem.HeaderTemplate>
                     </TreeViewItem>
-                    <TreeViewItem Header=" R-73" Selected="TreeViewItem_Selected">
+                    <TreeViewItem Header=" KT-12.7" Selected="TreeViewItem_Selected" >
                         <TreeViewItem.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -108,30 +94,23 @@ Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" Horizontal
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="../Assets/Image/Air/Ammo/P-73.png" Width="70" Height="50" Margin="4" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="176.801"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                    </Image>
+                                    <Image Source="../Image/infarny/КТ-12_7.png" Width="100" Height="50" Margin="4" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding}" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,0,0" />
                                 </Grid>
                             </DataTemplate>
                         </TreeViewItem.HeaderTemplate>
                     </TreeViewItem>
-                    <TreeViewItem Header=" R-27" Selected="TreeViewItem_Selected">
+                    <TreeViewItem Header=" Стугна" Selected="TreeViewItem_Selected">
                         <TreeViewItem.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="../Assets/Image/Air/Ammo/R-27.png" Height="50" Margin="-30,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+                                    <Image Source="../Image/Infarny/Стугна.png" Height="50" Margin="-30,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
                                         <Image.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleX="-1"/>
@@ -146,7 +125,7 @@ Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" Horizontal
                             </DataTemplate>
                         </TreeViewItem.HeaderTemplate>
                     </TreeViewItem>
-                    <TreeViewItem Header=" X-58" Selected="TreeViewItem_Selected">
+                    <TreeViewItem Header=" Форт-221" Selected="TreeViewItem_Selected">
                         <TreeViewItem.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -154,17 +133,19 @@ Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" Horizontal
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="../Assets/Image/Air/Ammo/X-58.png" Width="100" Height="50" Margin="4" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                    <Image Source="../Image/infarny/Форт-221.png" Width="100" Height="50" Margin="4" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
                                         <Image.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
                                                 <SkewTransform/>
-                                                <RotateTransform Angle="180.454"/>
+                                                <RotateTransform Angle="7"/>
                                                 <TranslateTransform/>
                                             </TransformGroup>
                                         </Image.RenderTransform>
                                     </Image>
                                     <TextBlock Text="{Binding}" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,0,0" />
+                                   
+                                   
                                 </Grid>
                             </DataTemplate>
                         </TreeViewItem.HeaderTemplate>
@@ -182,8 +163,7 @@ Style="{StaticResource MaterialDesignRaisedDarkButton}" Cursor="Hand" Horizontal
             <TextBlock Text="Вартість за одиницю:" Grid.Row="4" VerticalAlignment="Center" Margin="10" />
             <TextBox x:Name="txtUnitCost" Grid.Row="4" HorizontalAlignment="Stretch" Margin="150,0,10,10" />
 
-            <Button Content="Завершити" Grid.Row="5" HorizontalAlignment="Center" Margin="0,10" Click="SaveButton_Click" />
+            <Button Content="Завершити" Grid.Row="5" HorizontalAlignment="Center" Margin="0,20,0,0" Click="SaveButton_Click" />
         </Grid>
     </ScrollViewer>
-    
 </UserControl>

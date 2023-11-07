@@ -1,20 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
 using WpfAppMilitaryExport.Navigator;
@@ -22,56 +10,19 @@ using WpfAppMilitaryExport.Navigator;
 namespace WpfAppMilitaryExport.Icons
 {
     /// <summary>
-    /// Логика взаимодействия для WinNavyWeapom.xaml
+    /// Логика взаимодействия для WinNavyDetails.xaml
     /// </summary>
-    public partial class WinNavyWeapon : UserControl
+    public partial class WinNavyDetails : UserControl
     {
-        public WinNavyWeapon()
+        public WinNavyDetails()
         {
             InitializeComponent();
         }
 
-
-        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void bt_WeapomClick(object sender, RoutedEventArgs e)
         {
-            using (var context = new MilitaryDBContext())
-            {
-                // Отключаем триггер
-                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER UpdateWeaponTotalCost ON Navy_Weapon");
-
-                // Создаем новый объект Airplane на основе введенных данных
-                var newNavyWeapon = new Navy_Weapon()
-                {
-                    Name = txtName.Text,
-                    Count = int.Parse(txtCount.Text),
-                    Unit_Cost = decimal.Parse(txtUnitCost.Text),
-                    Total_Cost = int.Parse(txtCount.Text) * decimal.Parse(txtUnitCost.Text)
-                };
-
-                // Добавляем новый самолет в контекст и сохраняем изменения в базе данных
-                context.Navy_Weapon.Add(newNavyWeapon);
-                context.SaveChanges();
-
-                // Включаем триггер обратно
-                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER UpdateWeaponTotalCost ON Navy_Weapon");
-
-                // Очищаем поля ввода
-                txtName.Clear();
-                txtCount.Clear();
-                txtUnitCost.Clear();
-
-                // Обновляем отображение списка самолетов или выполните другие необходимые действия
-            }
-
-
-
-
-        }
-
-        private void bt_DetailsClick(object sender, RoutedEventArgs e)
-        {
-            var win_navyDetails = new WinNavyDetails();
-            NavigatorObject.Switch(win_navyDetails) ;
+            var win_NavyWeapon = new WinNavyWeapon();
+            NavigatorObject.Switch(win_NavyWeapon);
         }
 
         private void click_Main(object sender, RoutedEventArgs e)
@@ -84,6 +35,41 @@ namespace WpfAppMilitaryExport.Icons
         {
             var exit = new MainWindow();
             NavigatorObject.Switch(exit);
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new MilitaryDBContext())
+            {
+     
+                await context.Database.ExecuteSqlRawAsync("DISABLE TRIGGER  UpdateDetailTotalCost ON Navy_Details");
+
+                var newDetails = new Navy_Details()
+                {
+                    Name = txtName.Text,
+                    Count = int.Parse(txtCount.Text),
+                    Unit_Cost = decimal.Parse(txtUnitCost.Text),
+                    Total_Cost = int.Parse(txtCount.Text) * decimal.Parse(txtUnitCost.Text)
+                };
+
+        
+                context.Navy_Details.Add(newDetails);
+                context.SaveChanges();
+
+      
+                await context.Database.ExecuteSqlRawAsync("ENABLE TRIGGER  UpdateDetailTotalCost ON Navy_Details");
+
+ 
+                txtName.Clear();
+                txtCount.Clear();
+                txtUnitCost.Clear();
+
+
+            }
+
+
+
+
         }
 
         private void CreateQuery_Click(object sender, RoutedEventArgs e)
@@ -135,7 +121,6 @@ namespace WpfAppMilitaryExport.Icons
             {
                 MessageBox.Show("Ошибка при создании записи: " + ex.Message);
             }
-        }
-
+        }   
     }
 }

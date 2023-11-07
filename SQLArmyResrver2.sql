@@ -101,39 +101,7 @@ as begin
   ) AS subquery ON aif.AirplaneId = subquery.AirplaneId AND aif.AmmoId = subquery.AmmoId AND aif.DetailsId = subquery.DetailsId;
 end;
 
--- Добавление записей в таблицу Airplane
-INSERT INTO [Airplane] ([Name], [Count], [Unit_Cost], [Total_Cost])
-VALUES ('Airplane 1', 10, 50000.00, 0.00),
-       ('Airplane 2', 5, 75000.00, 0.00),
-       ('Airplane 3', 8, 60000.00, 0.00),
-       ('Airplane 4', 12, 55000.00, 0.00),
-       ('Airplane 5', 6, 70000.00, 0.00);
 
--- Добавление записей в таблицу Ammo
-INSERT INTO [Ammo] ([Name], [Count], [Unit_Cost], [Total_Cost])
-VALUES ('Ammo 1', 1000, 10.00, 0.00),
-       ('Ammo 2', 1500, 8.00, 0.00),
-       ('Ammo 3', 800, 12.00, 0.00),
-       ('Ammo 4', 1200, 9.00, 0.00),
-       ('Ammo 5', 1600, 7.00, 0.00);
-
--- Добавление записей в таблицу Details
-INSERT INTO [Details] ([Name], [Count], [Unit_Cost], [Total_Cost])
-VALUES ('Details 1', 200, 100.00, 0.00),
-       ('Details 2', 150, 120.00, 0.00),
-       ('Details 3', 100, 80.00, 0.00),
-       ('Details 4', 180, 110.00, 0.00),
-       ('Details 5', 220, 95.00, 0.00);
-
--- Добавление записей в таблицу Air_forces_request
-INSERT INTO [Air_forces_request] ([AirplaneId], [AmmoId], [DetailsId], [Cost])
-VALUES (1, 1, 1, 0.00),
-       (2, 2, 2, 0.00),
-       (3, 3, 3, 0.00),
-       (4, 4, 4, 0.00),
-       (5, 5, 5, 0.00);
-
----
 
 
 ---Сухопутные силы
@@ -210,27 +178,6 @@ as begin
 end;
 
 
-INSERT INTO [Infarny_Weapon] ([Name], [Count], [Unit_Cost])
-VALUES ('Weapon 1', 100, 500.00),
-       ('Weapon 2', 50, 750.00),
-       ('Weapon 3', 75, 600.00),
-       ('Weapon 4', 60, 550.00),
-       ('Weapon 5', 40, 720.00);
-
-	   INSERT INTO [Infantry_equipment] ([Name], [Count], [Unit_Cost])
-VALUES ('Equipment 1', 200, 100.00),
-       ('Equipment 2', 150, 120.00),
-       ('Equipment 3', 100, 80.00),
-       ('Equipment 4', 180, 90.00),
-       ('Equipment 5', 220, 110.00);
-
-	   INSERT INTO [Ground_forces_request] ([Infarny_WeaponId], [Infantry_equipmentId], [Cost])
-VALUES (1, 1, 0.00),
-       (2, 2, 0.00),
-       (3, 3, 0.00),
-       (4, 4, 0.00),
-       (5, 5, 0.00);
-
 --- ВМС
 
 
@@ -262,7 +209,20 @@ create table [Navy_forces_request]
 [Cost] decimal
 )
 
-
+SELECT 
+    NFR.Id AS RequestId,
+    NW.Name AS WeaponName,
+    NW.Count AS WeaponCount,
+    NW.Unit_Cost AS WeaponUnitCost,
+    NW.Total_Cost AS WeaponTotalCost,
+    ND.Name AS DetailsName,
+    ND.Count AS DetailsCount,
+    ND.Unit_Cost AS DetailsUnitCost,
+    ND.Total_Cost AS DetailsTotalCost,
+    NFR.Cost AS RequestCost
+FROM Navy_forces_request AS NFR
+JOIN Navy_Weapon AS NW ON NFR.Navy_WeaponId = NW.Id
+JOIN Navy_Details AS ND ON NFR.Navy_DetailsId = ND.Id;
 
 go
 
@@ -314,26 +274,7 @@ as begin
   ) AS subquery ON nfr.Navy_WeaponId = subquery.Navy_WeaponId AND nfr.Navy_DetailsId = subquery.Navy_DetailsId;
 end;
 
-INSERT INTO [Navy_Weapon] ([Name], [Count], [Unit_Cost])
-VALUES ('Weapon 1', 100, 500.00),
-       ('Weapon 2', 50, 750.00),
-       ('Weapon 3', 75, 600.00),
-	   ('Weapon 4', 50, 750.00),
-       ('Weapon 5', 75, 600.00);
 
-INSERT INTO [Navy_Details] ([Name], [Count], [Unit_Cost])
-VALUES ('Detail 1', 200, 100.00),
-       ('Detail 2', 150, 120.00),
-       ('Detail 3', 100, 80.00),
-	   ('Detail 4', 150, 120.00),
-       ('Detail 5', 100, 80.00);
-
-INSERT INTO [Navy_forces_request] ([Navy_WeaponId], [Navy_DetailsId], [Cost])
-VALUES (1, 1, 0.00), 
-       (2, 2, 0.00),
-       (3, 3, 0.00),
-	   (4, 4, 0.00),
-       (5, 5, 0.00);
 
 
 create table [Army_Order]
@@ -342,15 +283,28 @@ create table [Army_Order]
 [Ground_forces_requestId] int foreign key references [Ground_forces_request](Id),
 [Air_forces_requestId] int foreign key references [Air_forces_request](Id),
 [Navy_forces_requestId] int foreign key references [Navy_forces_request](Id),
+[Cost] decimal
 )
+go
 
+create trigger UpdateArmyCost
+on Army_Order
+after insert, update 
+as begin
+  
+  UPDATE ao
+  SET Cost = subquery.Cost
+  FROM Army_Order ao
+  JOIN (
+    SELECT i.Ground_forces_requestId, i.Air_forces_requestId, i.Navy_forces_requestId, SUM(GFR.Cost + AFR.Cost + NFR.Cost) AS Cost
+    FROM inserted i
+    JOIN Ground_forces_request GFR ON i.Ground_forces_requestId = GFR.Id
+    JOIN Air_forces_request AFR ON i.Air_forces_requestId = AFR.Id
+    JOIN Navy_forces_request NFR ON i.Navy_forces_requestId = NFR.Id
+    GROUP BY i.Ground_forces_requestId, i.Air_forces_requestId, i.Navy_forces_requestId
+  ) AS subquery ON ao.Ground_forces_requestId = subquery.Ground_forces_requestId AND ao.Air_forces_requestId = subquery.Air_forces_requestId AND ao.Navy_forces_requestId = subquery.Navy_forces_requestId;
+end;
 
-INSERT INTO [Army_Order] ([Ground_forces_requestId], [Air_forces_requestId], [Navy_forces_requestId])
-VALUES (1, 1, 1),
-       (2, 2, 2),
-       (3, 3, 3),
-       (4, 4, 4),
-       (5, 5, 5);
 
 
 ---!!! Министерство Обороны
@@ -360,31 +314,21 @@ create table [Order_Ministry_of_Defence]
 [Id] int identity primary key,
 [Army_OrderID]  int not null foreign key references [Army_Order](Id),
 [StartDate] datetime not null, 
-[EndDate] datetime not null,
 )
 
-Create table [Production]
-(
-[Id] int identity primary key,
-[Name] nvarchar (100),
-[State] bit, -- предприятия государственное или нет 
-[Region] nvarchar(50),
-[OrderId] int foreign key references [Order_Ministry_of_Defence](Id)
-)
+go
 
-INSERT INTO [Order_Ministry_of_Defence] ([Army_OrderID], [StartDate], [EndDate])
-VALUES (1, '2023-10-25', '2023-11-30'),
-       (2, '2023-10-26', '2023-12-01'),
-       (3, '2023-10-27', '2023-12-02'),
-       (4, '2023-10-28', '2023-12-03'),
-       (5, '2023-10-29', '2023-12-04');
+CREATE TRIGGER trg_SetCurrentTime
+ON [Order_Ministry_of_Defence]
+AFTER INSERT
+AS
+BEGIN
+    UPDATE [Order_Ministry_of_Defence]
+    SET StartDate = GETDATE()
+    WHERE Id IN (SELECT Id FROM INSERTED)
+END;
 
-INSERT INTO [Production] ([Name], [State], [Region], [OrderId])
-VALUES ('Production 1', 1, 'Region 1', 1),
-       ('Production 2', 0, 'Region 2', 2),
-       ('Production 3', 1, 'Region 3', 3),
-       ('Production 4', 0, 'Region 4', 4),
-       ('Production 5', 1, 'Region 5', 5);
+
 
 Create table [Account_Ministry]
 (
@@ -402,6 +346,9 @@ Create table [Account_Command]
 [Login] nvarchar(100),
 [Password] nvarchar(100)
 )
+
+INSERT INTO [Account_Command] ([Login], [Password])
+VALUES ('Markus', '123');
 
 SELECT OM.[Id] AS MinistryOfDefenceOrderId, OM.[StartDate], OM.[EndDate],
        AO.[Id] AS ArmyOrderId,

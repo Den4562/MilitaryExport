@@ -1,18 +1,7 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfAppMilitaryExport.Icons;
 using WpfAppMilitaryExport.Navigator;
 
@@ -119,7 +108,7 @@ namespace WpfAppMilitaryExport
 
                         //// Выполните SQL-запрос
                         cmd.ExecuteNonQuery();
-                        string triggerQuery = "UPDATE Army_Order SET Cost = 0 WHERE Id = SCOPE_IDENTITY()"; // Используйте SCOPE_IDENTITY() для получения ID только что вставленной записи
+                        string triggerQuery = "UPDATE Army_Order SET Cost = 0 WHERE Id = SCOPE_IDENTITY()"; // SCOPE_IDENTITY() Получает Id последней записи
                         using (SqlCommand triggerCmd = new SqlCommand(triggerQuery, connection))
                         {
                             triggerCmd.ExecuteNonQuery();

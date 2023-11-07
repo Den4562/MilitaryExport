@@ -1,6 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,28 +34,28 @@ namespace WpfAppMilitaryExport.Icons
             string login = Login.Text;
             string password = Pass.Password;
 
-            bool isMinistryAuthenticated = await AuthenticateMinistry(login, password);
-            bool isCommandAuthenticated = await AuthenticateCommand(login, password);
+            bool MinAuthenticated = await AuthenticateMinistry(login, password);
+            bool CommAuthenticated = await AuthenticateCommand(login, password);
 
-            if (isMinistryAuthenticated || isCommandAuthenticated)
+            if (MinAuthenticated || CommAuthenticated)
             {
-                if (isMinistryAuthenticated)
+                if (MinAuthenticated)
                 {
-                    // Успешная аутентификация в таблице Account_Ministry
-                    var ministryWindow = new WinMinistry(); // Предполагается, что это ваше окно для Ministry
+                  
+                    var ministryWindow = new WinMinistry(); // 
                     NavigatorObject.Switch(ministryWindow);
                 }
                 else
                 {
                     // Успешная аутентификация в таблице Account_Command
-                    var commandWindow = new Army_Request(); // Предполагается, что это ваше окно для Command
+                    var commandWindow = new Army_Request();
                     NavigatorObject.Switch(commandWindow);
                 }
             }
             else
             {
                 // Ошибка аутентификации
-                ShowSnackbar("Ошибка аутентификации");
+                ShowSnackbar("Помилка автентифікація");
             }
 
             Login.Text = "";

@@ -1,24 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Microsoft.Data.SqlClient;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfAppMilitaryExport.Icons;
-using WpfAppMilitaryExport.Navigator;
-using WpfAppMilitaryExport.DataBase.Table;
 using WpfAppMilitaryExport.DB;
+using WpfAppMilitaryExport.Navigator;
 
 namespace WpfAppMilitaryExport.Icons
 {
@@ -45,7 +32,8 @@ namespace WpfAppMilitaryExport.Icons
                     .Select(nfr => new
                     {
                         RequestId = nfr.Id,
-                        WeaponName = nfr.Navy_Weapon.Name,
+                        WeaponName
+                        = nfr.Navy_Weapon.Name,
                         WeaponCount = nfr.Navy_Weapon.Count,
                         WeaponUnitCost = nfr.Navy_Weapon.Unit_Cost,
                         WeaponTotalCost = nfr.Navy_Weapon.Total_Cost,
